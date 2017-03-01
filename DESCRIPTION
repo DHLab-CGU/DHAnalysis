@@ -1,0 +1,14 @@
+Package: DHAnalysis
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Authors@R: c(
+  person("Yi-Ju", "Tseng", , "yjtseng@mail.cgu.edu.tw", c("aut", "cre"))
+  )
+Description: Package for medical/health/clinical data analysis
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+URL: 
+Imports:
+plyr

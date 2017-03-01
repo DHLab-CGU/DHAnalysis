@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "Package: DHAnalysis\nType: Package\nTitle: What the Package Does (Title Case)\nVersion: 0.1.0\nAuthors@R: c(\n  person(\"Yi-Ju\", \"Tseng\", , \"yjtseng@mail.cgu.edu.tw\", c(\"aut\", \"cre\"))\n  )\nDescription: Package for medical/health/clinical data analysis\nLicense: MIT + file LICENSE\nEncoding: UTF-8\nLazyData: true\nURL: \nImports:\nplyr\n",
+    "created" : 1488363786149.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2794321438",
+    "id" : "8D6C09BF",
+    "lastKnownWriteTime" : 1488364573,
+    "last_content_update" : 1488364573679,
+    "path" : "~/GitHub/DHAnalysis/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "dcf"
+}
