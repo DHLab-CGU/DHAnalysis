@@ -1,14 +1,22 @@
 Package: DHAnalysis
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Health Data Analysis Tool
 Version: 0.1.0
+Date: 2017-03-17
 Authors@R: c(
   person("Yi-Ju", "Tseng", , "yjtseng@mail.cgu.edu.tw", c("aut", "cre"))
   )
-Description: Package for medical/health/clinical data analysis
+Description: R package for medical,health,clinical data analysis from DHLab at
+    CGU
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-URL: 
+URL: https://github.com/DHLab-CGU
 Imports:
-plyr
+    plyr,
+    dplyr,
+    icd,
+    readr,
+    lubridate,
+    stringr
+RoxygenNote: 5.0.1
