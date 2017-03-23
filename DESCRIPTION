@@ -18,5 +18,8 @@ Imports:
     icd,
     readr,
     lubridate,
-    stringr
+    stringr,
+    jsonlite,
+    doParallel
 RoxygenNote: 5.0.1
+Suggests: testthat

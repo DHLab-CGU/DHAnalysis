@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(doParallel)\nlibrary(jsonlite)\n\ncontext(\"RxNav\")\n\ntest_that(\"Check the MESH return\",\n          {NationalDrugCodeList<-c(\"54092047612\",\"00430078327\",\"00406035705\",\"00074433902\",\"00310075190\")\n          expect_equal(nrow(getMESHInfoBasedonNDC(NationalDrugCodeList)),11)})\n\n\n",
+    "created" : 1490239216940.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2266558966",
+    "id" : "188F249A",
+    "lastKnownWriteTime" : 1490239956,
+    "last_content_update" : 1490239956554,
+    "path" : "~/GitHub/DHAnalysis/tests/testthat/testRxNav.R",
+    "project_path" : "tests/testthat/testRxNav.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

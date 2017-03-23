@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#' Get the first diagnosis record\n#'\n#' This can be used to select the first diagnosis record\n#' based on ICD code (grepl language) in factIcd Data,\n#' return first diagnosis record based on factIcd Data\n#'\n#' @import stringr\n#' @import icd\n#' @param icdList\n#' @export\n#' @examples\n#' groupICDBasedOnCCS(icdList)\n#'\n\ngroupICDBasedOnCCS<-function(icdList){\n  Group<-character(length(icdList))\n  #icd9\n  Group[icd_is_valid(icdList)]<-\n    left_join(data.frame(ICDD=icdList[icd_is_valid(icdList)],stringsAsFactors = F),select(ccsICD9,ICDD,CCSCate),all.x=T,by = \"ICDD\")$CCSCate\n  #icd10\n  Group[!icd_is_valid(icdList)]<-\n    left_join(data.frame(ICDD=icdList[!icd_is_valid(icdList)],stringsAsFactors = F),select(ccsICD10,ICDD,CCSCate),all.x=T, by = \"ICDD\")$CCSCate\n  str_trim(Group)\n}\n",
+    "created" : 1490238217568.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3012041865",
+    "id" : "74C209",
+    "lastKnownWriteTime" : 1489738648,
+    "last_content_update" : 1489738648,
+    "path" : "~/GitHub/DHAnalysis/R/groupICDBasedOnCCS.R",
+    "project_path" : "R/groupICDBasedOnCCS.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "Package: DHAnalysis\nType: Package\nTitle: Health Data Analysis Tool\nVersion: 0.1.0\nDate: 2017-03-17\nAuthors@R: c(\n  person(\"Yi-Ju\", \"Tseng\", , \"yjtseng@mail.cgu.edu.tw\", c(\"aut\", \"cre\"))\n  )\nDescription: R package for medical,health,clinical data analysis from DHLab at\n    CGU\nLicense: MIT + file LICENSE\nEncoding: UTF-8\nLazyData: true\nURL: https://github.com/DHLab-CGU\nImports:\n    plyr,\n    dplyr,\n    icd,\n    readr,\n    lubridate,\n    stringr,\n    jsonlite,\n    doParallel\nRoxygenNote: 5.0.1\nSuggests: testthat\n",
+    "created" : 1490238804152.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3278317353",
+    "id" : "711010F7",
+    "lastKnownWriteTime" : 1490239603,
+    "last_content_update" : 1490239603122,
+    "path" : "~/GitHub/DHAnalysis/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "dcf"
+}

@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "#' Get MESH info based on NDC code\n#'\n#' This can be used to get MESH information based on NDC codes by RxNav API (https://rxnav.nlm.nih.gov)\n#'\n#' @import jsonlite\n#' @import doParallel\n#' @param NDCList Vector of NDC code in 11 digits format\n#' @param cores Number of cores you want to used\n#' @export\n#' @examples\n#' NationalDrugCodeList<-c(\"54092047612\",\"00430078327\",\"00406035705\",\"00074433902\",\"00310075190\")\n#' getMESHInfoBasedonNDC(NationalDrugCodeList)\n#'\ngetMESHInfoBasedonNDC<-function(NDCList,cores=8){\n\n  cl <- makeCluster(cores) # create a cluster with n cores\n  registerDoParallel(cl) # register the cluster\n  RxNormData = foreach(i = 1:length(NDCList),\n                       .combine = \"rbind\",\n                       .packages = \"jsonlite\") %dopar% {\n                         RxNorm<-fromJSON(paste0(\"https://rxnav.nlm.nih.gov/REST/rxcui?idtype=NDC&id=\",NDCList[i]) )\n                         if(is.null(RxNorm$idGroup$rxnormId)){\n                           rxTable<-data.frame(NDC=NDCList[i],\n                                               RxCui=\"\",\n                                               Desc=\"\",Type=\"\")\n                         }else{\n                           MESHClass<-fromJSON(paste0(\"https://rxnav.nlm.nih.gov/REST/rxclass/class/byRxcui?rxcui=\",RxNorm$idGroup$rxnormId,\"&relaSource=MESH\"))\n                           if(is.null(MESHClass$rxclassDrugInfoList$rxclassDrugInfo$minConcept$name)){\n                             rxTable<-data.frame(NDC=NDCList[i],\n                                                 RxCui=RxNorm$idGroup$rxnormId,\n                                                 Desc=\"\",Type=\"\")\n                           }else{\n                             meshTable<-data.frame(NDC=NDCList[i],\n                                                   RxCui=RxNorm$idGroup$rxnormId,\n                                                   Desc=unique(MESHClass$rxclassDrugInfoList$rxclassDrugInfo$rxclassMinConceptItem$className),\n                                                   Type=\"MESH\")\n                             miniTable<-data.frame(NDC=NDCList[i],\n                                                   RxCui=RxNorm$idGroup$rxnormId,\n                                                   Desc=unique(MESHClass$rxclassDrugInfoList$rxclassDrugInfo$minConcept$name),\n                                                   Type=\"miniConcept\")\n                             rxTable<-rbind(meshTable,miniTable)\n                           }\n                         }\n                         rxTable\n                       }\n  stopCluster(cl)\n  RxNormData\n}\n",
+    "created" : 1490238050105.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "718355058",
+    "id" : "313BF9AB",
+    "lastKnownWriteTime" : 1490239583,
+    "last_content_update" : 1490239583145,
+    "path" : "~/GitHub/DHAnalysis/R/getMESHInfoBasedonNDC.R",
+    "project_path" : "R/getMESHInfoBasedonNDC.R",
+    "properties" : {
+        "docOutlineVisible" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
