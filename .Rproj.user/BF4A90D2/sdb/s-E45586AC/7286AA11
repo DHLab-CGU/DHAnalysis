@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#' Generate Drug Era\n#'\n#' This can be used to merge pharmacy claims data into drug era with defined window. Exposure days will be cacluated, too.\n#'\n#' @import dplyr\n#' @import data.table\n#' @param CasePharm data.frame with MemberID (chr),Desc (chr),DispenseDate (Date),DaysSupply (num)\n#' @param window allowed gap between pharmacy claims, default is 30\n#' @export\n#' @examples\n#' getDrugEra(CasePharm) replace CasePharm to your own dataset\n#'\ngetDrugEra<-function(CasePharm,window=30)\n{\n  ### Drug Era\n  CasePharm<-CasePharm %>% arrange(MemberID,Desc,DispenseDate)\n  CasePharm<-data.table(CasePharm)\n  CasePharm[,diff:=c(NA,diff(DispenseDate)),by=list(Desc,MemberID)]\n  CasePharm$DaysSupplyB<-c(NA,CasePharm$DaysSupply[-nrow(CasePharm)])\n  CasePharm$DiffC<-CasePharm$diff-as.numeric(CasePharm$DaysSupplyB)\n  CasePharm$NewEraB<-CasePharm$DiffC>window\n  CasePharm[is.na(NewEraB)]$NewEraB<-T\n  CasePharm[,DrugEra:=cumsum(NewEraB),by=list(Desc,MemberID)]\n  ### Exposure day\n  FLData<-CasePharm %>% group_by(Desc,MemberID,DrugEra) %>% filter(row_number()==1|row_number()==n())\n  NofFData<-CasePharm[,list(NofRefills=.N), by=list(Desc,MemberID,DrugEra)]\n  FLData<-inner_join(FLData,NofFData,by=c(\"Desc\",\"MemberID\",\"DrugEra\"))\n  FLDataNew<-inner_join(FLData %>% group_by(Desc,MemberID,DrugEra) %>%  filter(row_number()!=1),\n                        FLData %>% group_by(Desc,MemberID,DrugEra) %>%  filter(row_number()==1) %>% select(Desc,MemberID,DrugEra,FirstDisDate=DispenseDate),\n                        by=c(\"Desc\",\"MemberID\",\"DrugEra\"))\n  FLDataNew<-rbind(FLDataNew,\n                   FLData %>% group_by(Desc,MemberID,DrugEra)%>% filter(row_number()==1) %>% mutate(FirstDisDate=DispenseDate))\n\n  FLDataNew<-FLDataNew %>% group_by(Desc,MemberID,DrugEra) %>% arrange(desc(DispenseDate))%>%  filter(row_number()==1)\n\n  FLDataNew$ExposureDays<-FLDataNew$DispenseDate-FLDataNew$FirstDisDate+as.numeric(FLDataNew$DaysSupply)\n\n  FLDataNew\n}\n",
+    "created" : 1490858648920.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2094757631",
+    "id" : "7286AA11",
+    "lastKnownWriteTime" : 1490872814,
+    "last_content_update" : 1490872814605,
+    "path" : "~/GitHub/DHAnalysis/R/getDrugEra.R",
+    "project_path" : "R/getDrugEra.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

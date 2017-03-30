@@ -1,15 +1,16 @@
-#' Caculate Drug Era
+#' Generate Drug Era
 #'
-#'
+#' This can be used to merge pharmacy claims data into drug era with defined window. Exposure days will be cacluated, too.
 #'
 #' @import dplyr
 #' @import data.table
 #' @param CasePharm data.frame with MemberID (chr),Desc (chr),DispenseDate (Date),DaysSupply (num)
+#' @param window allowed gap between pharmacy claims, default is 30
 #' @export
 #' @examples
-#' getDrugEra()
+#' getDrugEra(CasePharm) replace CasePharm to your own dataset
 #'
-getDrugEra<-function(CasePharm)
+getDrugEra<-function(CasePharm,window=30)
 {
   ### Drug Era
   CasePharm<-CasePharm %>% arrange(MemberID,Desc,DispenseDate)
@@ -17,7 +18,7 @@ getDrugEra<-function(CasePharm)
   CasePharm[,diff:=c(NA,diff(DispenseDate)),by=list(Desc,MemberID)]
   CasePharm$DaysSupplyB<-c(NA,CasePharm$DaysSupply[-nrow(CasePharm)])
   CasePharm$DiffC<-CasePharm$diff-as.numeric(CasePharm$DaysSupplyB)
-  CasePharm$NewEraB<-CasePharm$DiffC>30
+  CasePharm$NewEraB<-CasePharm$DiffC>window
   CasePharm[is.na(NewEraB)]$NewEraB<-T
   CasePharm[,DrugEra:=cumsum(NewEraB),by=list(Desc,MemberID)]
   ### Exposure day

@@ -2,18 +2,20 @@
 % Please edit documentation in R/getDrugEra.R
 \name{getDrugEra}
 \alias{getDrugEra}
-\title{Caculate Drug Era}
+\title{Generate Drug Era}
 \usage{
-getDrugEra(CasePharm)
+getDrugEra(CasePharm, window = 30)
 }
 \arguments{
 \item{CasePharm}{data.frame with MemberID (chr),Desc (chr),DispenseDate (Date),DaysSupply (num)}
+
+\item{window}{allowed gap between pharmacy claims, default is 30}
 }
 \description{
-Caculate Drug Era
+This can be used to merge pharmacy claims data into drug era with defined window. Exposure days will be cacluated, too.
 }
 \examples{
-getDrugEra()
+getDrugEra(CasePharm) replace CasePharm to your own dataset
 
 }
 
