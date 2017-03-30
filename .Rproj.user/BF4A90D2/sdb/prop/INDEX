@@ -6,6 +6,7 @@
 ~%2FGitHub%2FDHAnalysis%2FR%2FccsICD10.R="2D78FE93"
 ~%2FGitHub%2FDHAnalysis%2FR%2FgetBeforeAndAfterDate.R="670E8595"
 ~%2FGitHub%2FDHAnalysis%2FR%2FgetDiagPeriod.R="A2892BB7"
+~%2FGitHub%2FDHAnalysis%2FR%2FgetDrugEra.R="CA947070"
 ~%2FGitHub%2FDHAnalysis%2FR%2FgetFirstDiagBasedOnFactIcdList.R="1BBEBC7F"
 ~%2FGitHub%2FDHAnalysis%2FR%2FgetICDName.R="20283DFA"
 ~%2FGitHub%2FDHAnalysis%2FR%2FgetMESHInfoBasedonNDC.R="D86DFA61"
